@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .image {
+            position: relative;
+            width: 100%; /* for IE 6 */
+        }
+
+
+        .textbox{
+            background: rgba(255,204,0, 0.25);
+            position: absolute;
+            display: None;
+        }
+        .word {
+            background: rgba(255,204,0, 0.25);
+            position: absolute;
+        }
+        .word *{color: White;
+            text-align: center;}
+
+
+        .line {
+            background: rgba(255,204,0, 0.25);
+            position: absolute;
+            display: None;
+
+        }
+        .line *{color: White;
+            text-align: center;}
+
+
+        .total {
+            background: rgba(255,204,0, 0.25);
+            position: absolute;
+            display: None;
+
+        }
+        .total *{color: White;
+            text-align: center;}
+
+        .textoverlay{color: Black;
+            font-size: 43px;
+            text-align: center;
+            vertical-align: middle;
+            margin: 0;
+            padding: 0;
+            background: rgba(255, 255, 255, 0.9);
+            }
+
+    </style>
+</head>
+<body>
+
+<script>
+    function togglediv(id) {
+        var div = document.getElementById(id);
+        div.style.display = div.style.display == "none" ? "block" : "none";
+    }
+</script>
+
+<script>
+    function togglelineblock() {
+
+        var divs = document.getElementsByClassName("word");
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.display = divs[i].style.display == "none" ? "block" : "none";
+        }
+        var divs2 = document.getElementsByClassName("line");
+        for (var j = 0; j < divs2.length; j++) {
+            divs2[j].style.display = divs2[j].style.display == "block" ? "none" : "block";
+        }
+    }
+</script>
+
+<script>
+    function showtype(typestring) {
+        var types = ["word","line","total"];
+        for (var j = 0; j < types.length; j++) {
+            var visibility="none";
+            if (typestring == types[j]) {
+                visibility = "block";}
+
+
+
+            var divs = document.getElementsByClassName(types[j]);
+            for (var i = 0; i < divs.length; i++) {
+                    divs[i].style.display = divs[i].style.display = visibility;
+
+            }
+
+        }
+
+    }
+
+
+</script>
+
+
+
+<button onclick='showtype("word")'>Show word by word translation</button>
+<button onclick='showtype("line")'>Show line by line translation</button>
+<button onclick='showtype("total")'>Show total translation</button>
+<div class="image">
+    <img src="https://portalstoragewuprod2.azureedge.net/vision/OpticalCharacterRecognition/1.jpg" alt=""/>
+
+
+    <!--
+    FOR LINE ALL LINES(Regions[0]['Lines'])
+        for word in line['words]
+    Coordinates: word['boundingBox']: '791,118,592,838',
+    Text: word['text']                  -->
+    <div class="word" onclick="togglediv('line1')" style="
+            left: 799px;
+            top: 118px;
+            width: 102px;
+            height: 58px;">
+        <p class=textoverlay id="line1">IF<!--[CONTENT]-->
+        </p>
+    </div>
+
+    <div class="word" onclick="togglediv('line2')"  style="
+            left: 937px;
+            top: 118px;
+            width: 102px;
+            height: 58px;">
+        <p class=textoverlay id="line2">
+            WE<!--[CONTENT]-->
+        </p>
+    </div>
+
+    <!--
+    FOR LINE ALL LINES(Regions[0]['Lines'])
+    Coordinates: line['boundingBox']: '791,118,592,838',
+    Test: line['linestringtranslated']                  -->
+    <div class="line" onclick="togglediv('block1')" style="
+         left: 799px;
+         top: 118px;
+         width: 453px;
+         height: 58px;" >
+        <p class=textoverlay id="block1">
+            IF WE DID<!--[CONTENT]-->
+        </p>
+    </div>
+
+    <!--
+    ONLY ONE
+    Coordinates: regions[0]['boundingBox']: '791,118,592,838',
+    Test: regions[0]['totaltranslated']                  -->
+        <div class="total" onclick="togglediv('total')" style="
+             left: 791px;
+             top: 118px;
+             width: 592px;
+             height: 838px;" >
+            <p class=textoverlay id="total">
+                HVIS VI GJORDE ALLE DE TING, VI ER I
+                STAND TIL AT GØRE, VILLE VI       <!--[CONTENT]-->
+                BOGSTAVELIGT TALT FORBLØFFE OS SELV.
+            </p>
+        </div>
+
+</div>
+
+
+
+</body>
+</html>
